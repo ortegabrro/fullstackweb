@@ -1,16 +1,16 @@
 <mat-toolbar color="primary">
   <span><img src="/assets/images/logo.png" height=30 width=41></span>
-  <a mat-button>
-    <fa-icon [icon]="faHome"></fa-icon> Home
+  <a mat-button routerLink="/home" routerLinkActive='active'>
+    <fa-icon [icon]="faHome"></fa-icon> HOME
   </a>
   <a mat-button>
-    <fa-icon [icon]="faInfo"></fa-icon> About
+    <fa-icon [icon]="faInfo"></fa-icon> ABOUT
   </a>
-  <a mat-button>
-    <fa-icon [icon]="faList"></fa-icon> Menu
+  <a mat-button routerLink="/menu">
+    <fa-icon [icon]="faList"></fa-icon> MENU
   </a>
-  <a mat-button>
-    <fa-icon [icon]="faAddressCard"></fa-icon> Contact
+  <a mat-button routerLink="/contact">
+    <fa-icon [icon]="faAddressCard"></fa-icon> CONTACT
   </a>
 </mat-toolbar>
 
