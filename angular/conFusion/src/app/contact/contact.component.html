@@ -41,8 +41,8 @@
       <p>
         <mat-form-field class="half-width">
           <input matInput formControlName="firstname" placeholder="First Name" type="text" required>
-          <div *ngIf="feedbackForm.get('firstname').errors.required && (feedbackForm.get('firstname').dirty || feedbackForm.get('firstname').touched)">
-            First name is required</div>
+          <mat-error *ngIf="feedbackForm.get('firstname').errors.required && (feedbackForm.get('firstname').dirty || feedbackForm.get('firstname').touched)">
+            First name is required</mat-error>
 
         </mat-form-field>
         <mat-form-field class="half-width">

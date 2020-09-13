@@ -39,5 +39,4 @@ export class ContactComponent implements OnInit {
     this.feedbackForm.reset();
     this.feedbackFormDirective.resetForm();
   }
-
 }
