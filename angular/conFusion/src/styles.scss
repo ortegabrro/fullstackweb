@@ -70,5 +70,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .flex-spacer {
-flex: 1 1 auto;
+flex: 2;
+}
+
+.container{
+  margin: 16px;
+  border:10px;
 }

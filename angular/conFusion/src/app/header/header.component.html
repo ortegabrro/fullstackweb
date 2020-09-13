@@ -3,14 +3,18 @@
   <a mat-button routerLink="/home" routerLinkActive='active'>
     <fa-icon [icon]="faHome"></fa-icon> HOME
   </a>
-  <a mat-button>
+  <a mat-button routerLink="/about" routerLinkActive='active'>
     <fa-icon [icon]="faInfo"></fa-icon> ABOUT
   </a>
-  <a mat-button routerLink="/menu">
+  <a mat-button routerLink="/menu" routerLinkActive='active'>
     <fa-icon [icon]="faList"></fa-icon> MENU
   </a>
-  <a mat-button routerLink="/contact">
+  <a mat-button routerLink="/contact" routerLinkActive='active'>
     <fa-icon [icon]="faAddressCard"></fa-icon> CONTACT
+  </a>
+  <span class="flex-spacer"></span>
+  <a mat-button (click)="openDialog()">
+    <fa-icon [icon]="faSignInAlt"></fa-icon>Login
   </a>
 </mat-toolbar>
 
