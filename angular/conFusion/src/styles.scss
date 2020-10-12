@@ -77,3 +77,10 @@ flex: 2;
   margin: 16px;
   border:10px;
 }
+
+.highlight {
+  background-color: $background-pale;
+  border: 1px solid $primary-color-dark;
+  z-index: 1;
+  transform: scale(1.01);
+}

@@ -1,2 +1,0 @@
-# fullstackweb
-Coursera
