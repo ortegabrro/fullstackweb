@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Feedback, ContactType } from '../shared/feedback';
 import { faPhone, faFax, faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { flyInOut } from '../animations/app.animation';
+import { expand, flyInOut, visibility } from '../animations/app.animation';
+import { FeedbackService } from '../services/feedback.service';
 
 @Component({
   selector: 'app-contact',
@@ -14,7 +15,9 @@ import { flyInOut } from '../animations/app.animation';
     style: 'display:block;'
   },
   animations: [
-    flyInOut()
+    visibility(),
+    flyInOut(),
+    expand()
   ]
 
 })
@@ -27,15 +30,14 @@ export class ContactComponent implements OnInit {
   feedback: Feedback;
   contactType = ContactType;
   feedbackForm: FormGroup;
-
-
+  errMess: string;
+  visibility = 'shown';
   formErrors = {
     firstname: '',
     lastname: '',
     telnum: '',
     email: ''
   };
-
   validationMessages = {
     firstname: {
       required: 'First Name is required.',
@@ -57,19 +59,19 @@ export class ContactComponent implements OnInit {
     },
   };
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private feedbackService: FeedbackService) {
     this.createForm();
   }
 
   ngOnInit(): void {
     this.feedbackForm.valueChanges.subscribe(data => this.onValueChanged(data));
-    this.onValueChanged(); //reset form validation messages
+    this.onValueChanged(); // reset form validation messages
   }
 
   createForm(): void {
     this.feedbackForm = this.fb.group({
-      firstname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(5)]],
-      lastname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(5)]],
+      firstname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
+      lastname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
       telnum: ['', [Validators.required, Validators.pattern]],
       email: ['', [Validators.required, Validators.email]],
       agree: false,
@@ -99,9 +101,16 @@ export class ContactComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.feedback = this.feedbackForm.value;
-    console.log(this.feedback);
-    this.feedbackForm.reset();
-    this.feedbackFormDirective.resetForm();
+    this.visibility = 'hidden';
+    this.feedbackService.submitFeedback(this.feedbackForm.value)
+      .subscribe(feedback => {
+        this.feedback = feedback;
+      },
+        errmess => { this.feedback = null; this.errMess = (errmess as any); });
+
+    setTimeout(() => {
+      this.visibility = 'shown'; this.feedbackForm.reset();
+      this.feedbackFormDirective.resetForm();
+    }, 5000);
   }
 }

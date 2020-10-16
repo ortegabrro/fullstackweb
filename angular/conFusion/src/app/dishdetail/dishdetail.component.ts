@@ -65,9 +65,11 @@ export class DishdetailComponent implements OnInit {
     ngOnInit(): void {
         this.dishService.getDishIds().subscribe(dishIds => this.dishIds = dishIds);
         this.route.params
-            .pipe(switchMap((params: Params) => { this.visibility = 'hidden'; return this.dishService.getDish(params['id']); }))
-            .subscribe(dish => { this.dish = dish; this.dishcopy = dish; this.setPrevNext(dish.id); this.visibility = 'shown'; },
-                errmess => this.errMess = errmess);
+            .pipe(switchMap((params: Params) => {
+                this.visibility = 'hidden'; return this.dishService.getDish(params['id']); }))
+            .subscribe(dish => {
+                this.dish = dish; this.dishcopy = dish; this.setPrevNext(dish.id); this.visibility = 'shown';
+            }, errmess => this.errMess = errmess);
         this.formDishDetail = this.fb.group({
             author: ['', [Validators.required, Validators.minLength(2)]],
             comment: ['', [Validators.required]],
